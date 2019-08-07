@@ -1,0 +1,391 @@
+ <!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--移动设备优先-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!--bootstrap-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<title>equipment</title>
+	<style>
+		*{margin:0;paddign:0;}
+		.listings {width: 960px; line-height: 30px;font-size: 18px;}
+		.listings div img{margin-left: 20px;}
+		#add div img:hover{background-color:rgba(190,190,190,1.00);}
+		.state{margin-top: 5px}
+		.list{width: 960px;border: 1px solid;border-radius: 5px;display: flex;padding: 10px 0 5px 10px;line-height: 20px;}
+		.state1{display: flex;line-height: 30px}
+		.state0{display: flex;line-height: 30px}
+		.notOnline0{display: flex;}
+		.haigui{line-height: 30px;}
+		#edit div:hover{color: aqua;}
+		.del{margin-top: 5px;font-size: 15px;}
+		.del:hover{color: red;}
+	</style>
+	
+	<style>
+		.userForm{padding-top:5px;color: ;}
+		.delUserBtn{width:50px;height:30px;text-align: center;line-height:30px;margin-left:750px;background:#dc3545;border-radius:5px;color:#ffffff;display:none;}
+	</style>
+</head>
+
+<body>
+<div class="container" style="margin: 0 auto;">
+	
+<div style="margin: 0 auto;max-width: 960px;">
+	<div style="width: 960px;margin-top: 50px;padding: 5px;background-color: #e3e8ee;border-radius: 5px;">
+		<div style="960px;display: flex; font-size: 22px;">
+			<div id="add" style="display: flex;">
+				添加设备
+				<div id="addImg" style="padding-left: 10px;">
+					<img src="img/equipment/add.png" width="25px" height="25px" style="border-radius: 12px;" alt="">
+				</div>
+			</div>
+			<div style="width: 730px;"></div>
+			<div id="edit" style="display: flex;border-radius: 5px; background-color: #ffffff">
+				<div style="font-size: 18px;padding-left: 5px;line-height: 38px;">edit</div>
+				<div style="margin-top: 0px;margin-left: 10px;padding-right: 5px;">
+					<img src="./img/equipment/edit.png" width="23px" height="23px" style="border-radius: 12px;">
+				</div>
+			</div>
+		</div>
+		<div id="addList" style="display:none;">
+<!--			<input type="text" name="userId" placeholder="请输入userId">-->
+			<input type="text" name="equipment" style="width: 200px;height: 25px;border-radius: 5px;padding-left: 5px;" placeholder="请输入请输入序列号">
+			<button style="min-width: 50px; height: 30px;border-radius: 5px; background-color: #007bff;color: #ffffff;" id="submint" type="submit">确定</button>
+		</div>
+	</div>
+	<div id="listings" class="listings">
+<!--
+		<div class="list">
+			<h3 id="haigui1" class="haigui" name="state1">海龟1</h3>
+			<div id="state1" class="state1">
+				<img src="./img/equipment/Gpoint.png" alt="">
+				<div class="state">在线</div>
+				<div style="width: 700px;"></div>
+				<div class="del" name="del1">删除</div>
+			</div>
+		</div>
+		<div class="list">
+			<h3 id="haigui2" class="haigui" name="state1">海龟2</h3>
+			<div id="notOnline0" class="notOnline0">
+			<div id="notOnline0" class="notOnline0">
+				<img src="./img/equipment/Ypoint.png" alt="">
+				<div class="state">不在线</div>
+				<div style="width: 682px;"></div>
+				<div class="del" name="del2">删除</div>
+			</div>
+		</div>
+-->
+	</div>
+</div>
+	
+<!--用户管理-->
+<!--
+	<div id="app" class="row" style="margin: 100px auto;max-width: 960px;">
+		<div class="">
+			<br/>
+			<div style="display: flex">
+				<p style="font-size: 20px;padding-top: 3px;">用户管理</p>
+				<div id="btnDelEdit" style="padding-left: 10px;">
+					<img src="img/equipment/add.png" width="25px" height="25px" style="margin-top:5px;border-radius: 12px;" alt="">
+				</div>
+<!--				<button id="btnDelEdit" style="height:30px;width:60px;border-radius:5px;">编辑</button>-->
+<!--			</div>
+				
+			<button id="del_sel" style="height:30px;width:80px;border-radius:5px;background:#dc3545;color:#ffffff;display:none;">删除用户</button>
+			
+			<button id="add_sel" style="height:30px;width:80px;border-radius:5px;background:#28a745;color:#ffffff;display:none;">添加用户</button>
+			
+				
+			<div id="listContanerAdd" style="display: none">
+				
+				<input style="width: 200px;height: 25px;border-radius: 5px;padding-left: 5px;" id="userName" name="userName" type="text" placeholder="请输入用户名">
+				
+				<input style="width: 200px;height: 25px;border-radius: 5px;padding-left: 5px;" id="userPassword" name="userPassword" type="text" placeholder="请输入密码">
+				
+				<button style="background: #007bff;color: #FFFFFF;border-radius: 5px;width: 70px;height: 40px; " type="submit" id="addUser">提交</button>
+			</div>	
+			
+			<div id="listContaner" style="display: none">
+				<input style="width: 200px;height: 25px;border-radius: 5px;padding-left: 5px;" type="text" id="userList" name="delUserName" placeholder="请输入删除的账号">
+<!--				<input style="width: 200px;height: 25px;border-radius: 5px;padding-left: 5px;" type="text" id="userPass" name="delUserPassword" placeholder="请输入删除账号的密码">-->
+<!--				<button style="background: #dc3545;color: #FFFFFF;border-radius: 5px;width: 70px;height: 40px; " type="submit" id="delUser">删除</button>
+			</div>
+				
+			<div>并联的用户：</div>
+			<div id="user_listing"></div>
+		</div>
+	</div>
+-->
+</div>
+
+</body>
+</html>
+<script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="js/address.js"></script>
+<script type="text/javascript" src="js/cookieUtil.js"></script>
+<!--vue.js-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+<script>
+
+//获取设备列表
+	window.onload=function(){
+		var userId = cookieUtil.get("userId")
+//		console.log(userId)
+		$.ajax({
+			type:'GET',
+			url:'http://'+ A +'/user/getDevices',
+//			url:'../JSON/user/getDevices/success.json',
+			dataType:'JSON',
+			data:{
+				userId:userId
+			},
+			success:function(data){
+				var str = data.data;
+//				var state = data.data.state
+//				console.log(data)
+				console.log(str);
+//				console.log(state)
+				var tab = '<div class="listings">'
+//				for(var i=0; i<str.length; i++){
+//					var state = str[i].state
+//					console.log(state)
+//					if(state===1){
+				
+//	设备名称aaa			
+						for(var i=0; i<str.length;i++){
+							tab += '<div class="list">'
+							tab += '<h3 id="'+ data.data[i].deviceId + '" class="haigui" name="state' + data.data[i].state + '">海龟'+[i+1]+'</h3>'
+							tab += '<div class="state' + data.data[i].state + '"></div>'
+							tab += '</div>'
+						}
+
+				tab += '</div>'
+				$('#listings').html(tab);
+				
+				$('.state1').html('<img src="./img/equipment/Gpoint.png"><div class="state1">在线</div><div style="width: 700px;"></div><div class="del" name="" style="display:none">删除</div>');
+				$('.state0').html('<img src="./img/equipment/Ypoint.png"><div class="state0">不在线</div><div style="width: 682px;"></div><div class="del" name="" style="display:none">删除</div>')
+				var tabNotOnline = '<img src="./img/equipment/Ypoint.png"><div class="state0">在线</div><div style="width: 700px;"></div>'
+//aaa
+				
+			$('.list h3').click(function(){
+				console.log(this.id)
+				var name = $(this).attr("name");
+				if(name==="state1")
+				{
+				cookieUtil.unset("deviveId");
+				cookieUtil.set("deviceId",this.id);
+
+				document.location.href="head.html"
+				}			
+				else{
+					alert('设备不在线')
+				}	
+			});
+			},
+			error:function(data){
+				console.log(data)
+			},
+			
+		});
+		
+		
+//		$('#state1').html('<img src="./img/equipment/Gpoint.png"><div class="state1">在线</div><div style="width: 700px;"></div><div id="del1" class="del" style="display:none">删除</div>');
+//		$('#state0').html('<div id="state0" class="state0"><img src="./img/equipment/Ypoint.png"><div class="state">不在线</div><div style="width: 682px;"></div><div id="del2" class="del" style="display:none">删除</div></div>')
+	//存入cookieUtil
+	};
+	
+//编辑
+	$('#edit').click(function(){
+//		alert('删除')
+		$('.del').show();
+		$('.del').click(function(){
+//			alert(this.id);
+			alert('删除失败');
+//			$('.del').hide();
+//			return;
+			history.go(0)
+		})
+
+	});
+</script>
+<script>
+	//添加设备
+	var userId = cookieUtil.get("userId")
+	var addList = document.getElementById('addList');
+	$('#add').click(function(){
+		addList.style.cssText="display:block"
+//		addList.show()
+	});
+//	var str1 = $('input[name=userId]');
+	var str2 = $('input[name=equipment]');
+//	var userId = str1.val();
+	var equipment = str2.val();
+	$('#submint').click(function(){
+//		console.log(userId);
+//		console.log(equipment);	
+//		console.log(str1)
+//		console.log(str2)
+		$.ajax({
+			type:'POST',
+			url:'http://'+ A +'/user/addDevice',
+			dataType:'JSON',
+			data:{
+				userId:userId,
+				deviceId:equipment
+			},
+			success:function(data){
+				var code = data.code
+				var msg = data.msg
+				if(code===400){
+					alert(msg)
+				}else{
+					if(code===200){
+						alert(msg)
+						history.go(0)
+					}
+				}
+			},
+			error:function(){
+				alert('error')
+			},
+			
+		});
+		addList.style.cssText="display:none;"
+	});
+	
+
+</script>
+
+<!--获取用户列表-->
+
+<script>	
+
+$(function(){
+	$.ajax({
+		type:'GET',
+		url:'http://111.230.89.193:8888/user/list',
+		dataType:'JSON',
+		data:{
+			
+		},
+		success:function(data){
+			console.log(data)
+			var user_listing = '<form class="userForm">'
+			for(var i=0;i<data.data.length;i++){
+				var userId = data.data[i].userId
+				var userList = data.data[i].userName
+				console.log(userList)
+				user_listing += '<div style="display:flex;background:#f9f9fa;padding:5px;border:0.5px solid #ced4da;width:960px;"><div style="padding-left:5px;color:#3caa49;">' + '用户' + [i+1] + '：' + data.data[i].userName + '</div>'+ '<span class="delUserBtn" id="'+ data.data[i].userId +'" >删除</span>' +'</div>' 
+				
+			}
+			user_listing += '</form>'
+			$('#user_listing').html(user_listing)
+			
+
+			$('.delUserBtn').click(function(){
+				var userId = this.id;
+//				cookieUtil.unset("delUserId")
+//				cookieUtil.set("delUserId",userId)
+//				alert(cookieUtil.get("delUserId"));
+					$.ajax({
+						type:'GET',
+						url:'http://111.230.89.193:8888/user/delete?',
+						dataType:'JSON',
+						data:{
+							userId:userId,
+						},
+						success:function(data){
+							console.log(data)
+							var code = data.code
+							var msg = data.msg
+							var data = data.data
+							if(code==400){
+								alert(msg + '，' + data)
+							}else{
+								if(code==200){
+									alert(msg)
+									history.go(0)
+								}
+							}
+						},
+						error:function(){
+							alert('error')
+						}
+					});
+			});
+			
+			$('#del_sel').click(function(){
+				$("span").css("display","block");
+		//		var div = document.getElementById("listContaner")
+//				var div = document.getElementsByClassName("delUserBtn")
+		//		div.style.cssText='style="width:50px;height:30px;text-align: center;line-height:30px;margin-left:750px;background:#dc3545;border-radius:5px;color:#ffffff;display:none;"';
+//				div.style.display = "block";
+
+			});
+			
+		},
+		error:function(){
+			console.log('获取用户列表失败')
+		}
+	});
+	
+	$('#btnDelEdit').click(function(){
+//		alert('del')
+		var div = document.getElementById("del_sel");
+		var divAdd = document.getElementById("add_sel");
+		div.style.cssText='height:30px;width:80px;border-radius:5px;background:#dc3545;color:#ffffff;display:inline-block;';
+		divAdd.style.cssText='height:30px;width:80px;border-radius:5px;background:#28a745;color:#ffffff;display:inline-block;';
+			
+
+	});
+
+	
+	$('#add_sel').click(function(){
+		var div = document.getElementById("listContanerAdd")
+		div.style.cssText='display:block;';
+			
+	});
+	
+
+});
+
+	$('#addUser').click(function(){
+		var u = $('input[name=userName]');
+		var p = $('input[name=userPassword]')
+		var userName = u.val()
+		var password = p.val()
+		console.log('用户名：'+userName)
+		console.log('密码：：'+password)
+		$.ajax({
+			type:'POST',
+			url:'http://111.230.89.193:8888/user/add?',
+			dataType:'JSON',
+			data:{
+				userName:userName,
+				password:password,
+				
+			},
+			success:function(data){
+				console.log(data)
+				var code = data.code
+				var msg = data.msg
+				if(code==400){
+					alert(msg)
+				}else{
+					if(code==200){
+						alert(msg)
+						history.go(0)
+					}
+				}
+			},
+			error:function(){
+				alert('error')
+			}
+		})
+	});	
+	
+
+</script>
