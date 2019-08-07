@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>轻应用-视频开发套件</title>
+</head>
+<body>
+	//首先引入js
+  <script src="../EZUIKit/ezuikit.js"></script>
+  <script src="../EZUIKit/js/jquery.min.js"></script>
+//页面创建div标签
+  <div id="myPlayer" width="500px" height="500px"></div>
+
+</body>
+	<script>
+	//开始初始化监控地址
+	var player = new EZUIPlayer({
+      id: 'myPlayer',
+      url:'ezopen://open.ys7.com/203751922/1.live',
+      autoplay: true,
+      accessToken: "at.8o2k6dbpcvtr13reaa96hbnya6fee2wf-9gu6zcjmh2-1j4yrsb-imvlc5poc",
+      decoderPath: '{{location path}}',
+      width: 600,
+      height: 400,
+    });
+//播放
+        player.play();
+//结束
+        player.stop();
+	</script>
+</html>

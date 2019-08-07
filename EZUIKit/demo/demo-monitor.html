@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <title>EZOPEN播放协议</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    #url,
+    #url2,
+    #accessToken {
+      width: 100%;
+    }
+
+    .btn-container {
+      margin: 10px;
+    }
+  </style>
+</head>
+<script>
+</script>
+
+<body>
+  <script src="../ezuikit.js"></script>
+  <!-- <script src="../js/jsPlugin-1.2.0.js"></script> -->
+  <script src="../js/jquery.min.js"></script>
+  <h2>预览，回放功能示例：</h2>
+  <textarea id="url" placeholder="这里输入ezopen地址"></textarea>
+  <textarea id="accessToken" placeholder="这里输入accessToken"></textarea>
+  <div class="btn-container">
+    <button id="init">初始化播放</button>
+    <button id="stop">结束</button>
+  </div>
+  <div id="playWind" style="width: 600px; height: 400px;">
+  </div>
+<!--
+	<script>
+		var AppKey = '952b321600b3453fae7d5435e7e29da2'
+		var Secret = 'ae1e6b8f0be161939f3bd9ed5d7656b3'
+		$.ajax({
+			type:'POST',
+			url:'https://open.ys7.com/api/lapp/token/get?',
+			dataType:"JSON",
+			data:{
+				appKey:AppKey,
+				appSecret:Secret,
+			},success:function(data){
+//							console.log(data)
+				var dataAcc = data.data.accessToken
+//							console.log(dataAcc)
+				$.ajax({
+					type:'POST',
+					url:"https://open.ys7.com/api/lapp/live/video/list?",
+					dataType:'JSON',
+					data:{
+						accessToken:dataAcc,
+					},success:function(page){
+						console.log(page)
+						var rtmp = page.data[0].rtmp
+						console.log(rtmp)
+						var videoObject = {
+						container: '#video', //容器的ID或className
+						variable: 'player',//播放函数名称
+						autoplay:false,
+						live:true,
+//									video: 'http://hls01open.ys7.com/openlive/e0f4707fa92c484cbd4e4ad31c074bd3.hd.m3u8'
+						video: 'http://hls01open.ys7.com/openlive/f71ec910bd0e4384aec9c190635fd294.hd.m3u8'
+					};
+					var player = new ckplayer(videoObject);
+					},error:function(page){
+
+					}
+				})
+			},error:function(data){
+
+			}
+		})
+	</script>
+-->
+  <script>
+    $("#init").click(function () {
+      function handleError(e){
+          console.log('捕获到错误',e)
+          //alert(e)
+      }
+      var url = $('#url').val().trim();
+      var accessToken = $('#accessToken').val().trim();
+      var decoder = new EZUIKit.EZUIPlayer({
+        id: 'playWind',
+        autoplay: true,
+        url: url,
+        accessToken: accessToken,
+        decoderPath: '../',
+        width: 600,
+        height: 400,
+        handleError: handleError,
+      });
+      // 这里是打印日志，本例抛出到播放页面
+      decoder.on('log', log);
+      function log(str) {
+        var div = document.createElement('DIV');
+        div.innerHTML = (new Date()).Format('yyyy-MM-dd hh:mm:ss.S') + JSON.stringify(str);
+        document.body.appendChild(div);
+      }
+      $("#start").click(function () {
+        function handleError(e){
+          console.log('handleError',e)
+        }
+        function handleSuccess(){
+          console.log('handleSuccess')
+        }
+        decoder.play({
+          handleError: handleError,
+        });
+      })
+      $("#pause").click(function () {
+        decoder.pause();
+      })
+      $("#stop").click(function () {
+        decoder.stop();
+      })
+
+    })
+  </script>
+</body>
+
+</html>
